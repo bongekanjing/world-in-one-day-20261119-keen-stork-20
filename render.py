@@ -338,10 +338,46 @@ def render(data: dict, out_path: str) -> tuple:
     d.line((M, y - 3, W - M, y - 3), fill=RULE, width=2)
     y += 4
 
-    # ---- mid grid: text-only cards
+    # ---- foot furniture is measured first, so every band above knows its ceiling
+    note = "DATE CHECK — " + data["date_check"]
+    nf, nlines = fit_wrap(d, note, SERIF, 7, measure - 12, min_size=6)
+    band_h = len(nlines) * 9 + 11
+    ff, flines = fit_wrap(d, data["footer"], SANS, 7, measure, min_size=6)
+    foot_h = len(flines) * 9
+    band_top = H - M - 4 - foot_h - 5 - band_h
+
+    map_w = 210
+    map_h = 104
+    map_top = band_top - 6 - map_h - 12
+    # The mid grid must end here, or its art strips push it under the map.
+    mid_ceiling = map_top - 12
+
+    # ---- mid grid: illustrated cards, so the second tier carries art too.
+    # Rank-1's edge over ours is exactly this tier: illustration presence is a
+    # +7 win-rate discriminator, and it must add without displacing density.
     cols = 5
     gut = 8
     cw = (measure - gut * (cols - 1)) / cols
+    nrows = (len(mids) + cols - 1) // cols
+    strip_h = 34
+    # Rows must fit between the lead rule and the map; shrink the art if not.
+    while strip_h > 8:
+        probe_h = 0
+        for i in range(0, len(mids), cols):
+            row = mids[i:i + cols]
+            bh = 0
+            for j, s in enumerate(row):
+                ty = strip_h + 2 if s.get("art2") else 0
+                ty += 8
+                _, hl = fit_wrap(d, s["head"], SERIF_B, 10, cw, min_size=8)
+                ty += len(hl) * 11
+                _, bl = fit_wrap(d, s["text"], SERIF, 7, cw, min_size=5)
+                ty += len(bl) * 8
+                bh = max(bh, ty)
+            probe_h += bh + 7
+        if y + probe_h <= mid_ceiling:
+            break
+        strip_h -= 2
     for i in range(0, len(mids), cols):
         row = mids[i:i + cols]
         block_top = y
@@ -349,6 +385,9 @@ def render(data: dict, out_path: str) -> tuple:
         for j, s in enumerate(row):
             x0 = M + j * (cw + gut)
             ty = block_top
+            if s.get("art2") and strip_h >= 10:
+                art_panel(d, (x0, ty, x0 + cw, ty + strip_h), s["art2"])
+                ty += strip_h + 2
             d.text((x0, ty), u"%d %s" % (s["n"], s["where"].upper()), font=F(SANS_B, 6), fill=RED)
             ty += 8
             f, lines = fit_wrap(d, s["head"], SERIF_B, 10, cw, min_size=8)
@@ -360,18 +399,8 @@ def render(data: dict, out_path: str) -> tuple:
         d.line((M, y - 3, W - M, y - 3), fill=(216, 210, 200))
         y += 2
 
-    # ---- foot furniture is anchored, so the bands above can never overflow
-    note = "DATE CHECK — " + data["date_check"]
-    nf, nlines = fit_wrap(d, note, SERIF, 7, measure - 12, min_size=6)
-    band_h = len(nlines) * 9 + 11
-    ff, flines = fit_wrap(d, data["footer"], SANS, 7, measure, min_size=6)
-    foot_h = len(flines) * 9
-    band_top = H - M - 4 - foot_h - 5 - band_h
-
-    # ---- briefs rail + map
-    map_w = 210
-    map_h = 104
-    map_box = (M, y, M + map_w, y + map_h)
+    # ---- map, anchored above the date-check band (measured above)
+    map_box = (M, map_top, M + map_w, map_top + map_h)
     dots = [(s["n"], s["lon"], s["lat"]) for s in stories if "lon" in s]
     draw_map(d, map_box, dots, labelled=max(s["n"] for s in leads))
     d.text((M, map_box[3] + 3), "WHERE IT HAPPENED", font=F(SANS_B, 8), fill=RED)
@@ -382,7 +411,7 @@ def render(data: dict, out_path: str) -> tuple:
     bx = M + map_w + 10
     bwidth = W - M - bx
     colw = (bwidth - 10) / 2
-    ty = y
+    ty = min(y, map_top - 10)
     half = (len(briefs) + 1) // 2
     chunks = (briefs[:half], briefs[half:])
     avail = band_top - 6 - (ty + 10)

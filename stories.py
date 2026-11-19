@@ -60,61 +60,61 @@ DATA = {
              lon=-73.99, lat=40.75),
 
         # ---------------- mid grid ----------------
-        dict(n=4, region="EUROPE", where="The Hague", mid=True,
+        dict(n=4, region="EUROPE", where="The Hague", mid=True, art2="court",
              head="World Court reads its Rohingya judgment",
              text="The ICJ delivers judgment in The Gambia's case against Myanmar over "
                   "the 2017 campaign. The reading began at 10:00 local.",
              lon=4.3, lat=52.08),
-        dict(n=5, region="EUROPE", where="Antalya", mid=True,
+        dict(n=5, region="EUROPE", where="Antalya", mid=True, art2="storm",
              head="COP31 enters its last two days with finance unresolved",
              text="Ministers take over the text. A draft targets $120bn a year of "
                   "adaptation finance by 2035; how to pay for it is still open.",
              lon=30.7, lat=36.9),
-        dict(n=6, region="ASIA-PACIFIC", where="Odisha", mid=True,
+        dict(n=6, region="ASIA-PACIFIC", where="Odisha", mid=True, art2="storm",
              head="100,000 evacuated as Cyclone Akvan closes on the coast",
              text="Thirteen districts are on red alert. The IMD expects landfall near "
                   "Gopalpur around noon on Friday, between Narsapur and Puri, with winds "
                   "of 90-100km/h. Schools are shut from 19 to 21 November.",
              lon=85.8, lat=20.3),
-        dict(n=7, region="ASIA-PACIFIC", where="Seoul", mid=True,
+        dict(n=7, region="ASIA-PACIFIC", where="Seoul", mid=True, art2="crowd",
              head="Korea halts every flight for the exam's listening test",
              text="All take-offs and landings pause for 35 minutes and the stock market "
                   "opens late, as 500,000-odd candidates sit the suneung.",
              lon=126.98, lat=37.57),
-        dict(n=8, region="EUROPE", where="Kyiv", mid=True,
+        dict(n=8, region="EUROPE", where="Kyiv", mid=True, art2="missile",
              head="Ukraine strikes the Kerch bridge's railway, halting trains",
              text="Drones and missiles hit the rail section on Thursday, Ukrainian "
                   "officials said, days after strikes damaged the road span. Train "
                   "traffic across the Crimea bridge was suspended.",
              lon=30.52, lat=50.45),
-        dict(n=9, region="ASIA-PACIFIC", where="Dhaka", mid=True,
+        dict(n=9, region="ASIA-PACIFIC", where="Dhaka", mid=True, art2="crowd",
              head="Four killed as a shutdown called by Hasina's party grips Bangladesh",
              text="Protests close parts of the country and a fire, suspected arson, "
                   "damages Muhammad Yunus's ancestral home in Chattogram.",
              lon=90.4, lat=23.81),
-        dict(n=10, region="AFRICA", where="Nairobi", mid=True,
+        dict(n=10, region="AFRICA", where="Nairobi", mid=True, art2="storm",
              head="Kenya counts 71 flood deaths as forecasters warn of more rain",
              text="The toll has built since March, the government says, with Nairobi the "
                   "worst-hit county. El Nino rains since 17 November have renewed the "
                   "flooding.",
              lon=36.82, lat=-1.29),
-        dict(n=11, region="ASIA-PACIFIC", where="Kumamoto", mid=True,
+        dict(n=11, region="ASIA-PACIFIC", where="Kumamoto", mid=True, art2="storm",
              head="Magnitude 5.7 quake shakes Kyushu before dawn",
              text="The 02:22 temblor struck at a depth of about 10km in the "
                   "Amakusa-Ashikita area. No tsunami warning was issued.",
              lon=130.7, lat=32.79),
-        dict(n=12, region="OCEANIA", where="Wellington", mid=True,
+        dict(n=12, region="OCEANIA", where="Wellington", mid=True, art2="chart",
              head="Nicholls hundred answers Bumrah on the first day",
              text="New Zealand recovered from 70 for 5 at the Basin Reserve after "
                   "Jasprit Bumrah's opening burst; Henry Nicholls made his 12th Test ton.",
              lon=174.78, lat=-41.29),
-        dict(n=13, region="THE AMERICAS", where="Port-au-Prince", mid=True,
+        dict(n=13, region="THE AMERICAS", where="Port-au-Prince", mid=True, art2="crowd",
              head="UN records 4,595 killed in Haiti's armed violence this year",
              text="The OHCHR count runs from 1 January to 31 October and records 2,050 "
                   "more injured. Gangs have turned to reprisals against residents "
                   "suspected of helping the police, it said.",
              lon=-72.34, lat=18.54),
-        dict(n=14, region="ASIA-PACIFIC", where="Tokyo", mid=True,
+        dict(n=14, region="ASIA-PACIFIC", where="Tokyo",
              head="Japan and India agree to deepen defence and economic ties",
              text="Their foreign and defence ministers met in the 2+2 format on Thursday "
                   "and set out closer cooperation on security and a free and open "
